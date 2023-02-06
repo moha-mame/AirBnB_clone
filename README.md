@@ -9,7 +9,7 @@ This is a simplified console for the back-end of the AirBnB Clone project. It is
 
 
 
-## Description :Diamond_shape:
+## Description :triangular_ruler:
 
 
 
