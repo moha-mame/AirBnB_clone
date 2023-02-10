@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-
+"""Place Module"""
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-
+    """
+    All public class attribute should be empty
+    """
     city_id = ""
     user_id = ""
     name = ""
