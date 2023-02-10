@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         if args == "quit" or args == "EOF":
             print("Quit command to exit the program\n")
         elif args == "create":
-            print("Create command to create new User\n")
+            print("Create command to create new instance\n")
         elif args == "show":
             print("Show command to show an instance based on class name and id\n")
         elif args == "destroy":
