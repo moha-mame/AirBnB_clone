@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" default Module """
+""" unique FileStorage instance for your application """
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -10,10 +10,8 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-
 class Classes(dict):
     """ classes """
-
     def __getitem__(self, key):
         """get item"""
         try:
