@@ -22,7 +22,23 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb)$ '
 
-
+    def do_help(self, args):
+        if args == "quit" or args == "EOF":
+            print("Quit command to exit the program\n")
+        elif args == "create":
+            print("Create command to create new User\n")
+        elif args == "show":
+            print("Show command to show an instance based on class name and id\n")
+        elif args == "destroy":
+            print("Delete command to delete an instance based on class name and id\n")
+        elif args == "all":
+            print("All command to print all instances based or not class name\n")
+        elif args == "update":
+            print("Update command to update an instance base on class name and id by adding or updating attribute\n")
+        else:
+            print("\nDocumented commands (type help <topic>):")
+            print("=================================")
+            print("EOF\tall\tcreate\tdestroy\thelp\tquit\tshow\tupdate")
 # quit and EOF to exit the program
 
     def do_EOF(self, line):
