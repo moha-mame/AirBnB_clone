@@ -49,8 +49,9 @@ class BaseModel:
 
     def to_dict(self):
         """Return dictionary representation of BaseModel class."""
-        new_dict = dict(self.__dict__)
-        new_dict['created_at'] = self.__dict__['created_at'].isoformat()
-        new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
-        new_dict['__class__'] = self.__class__.__name__
-        return (new_dict)
+        nw_dct = dict(self.__dict__)
+        nw_dct['__class__'] = self.__class__.__name__
+        nw_dct['created_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        nw_dct['updated_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+
+        return (nw_dct)
