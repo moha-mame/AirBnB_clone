@@ -15,6 +15,7 @@ new_classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'Amenity': Amenity, 'Place': Place, 'City': City,
                'Review': Review}
 
+
 # Declare the HBNBCommand class
 class HBNBCommand(cmd.Cmd):
     """
@@ -28,13 +29,13 @@ class HBNBCommand(cmd.Cmd):
         elif args == "create":
             print("Create command to create new instance\n")
         elif args == "show":
-            print("Show command to show an instance based on class name and id\n")
+            print("show an instance based on class name and id\n")
         elif args == "destroy":
-            print("Delete command to delete an instance based on class name and id\n")
+            print("Delete command to delete an instance\n")
         elif args == "all":
-            print("All command to print all instances based or not class name\n")
+            print("print all instances based or not class name\n")
         elif args == "update":
-            print("Update command to update an instance base on class name and id by adding or updating attribute\n")
+            print("update an instance base on class name and id\n")
         else:
             print("\nDocumented commands (type help <topic>):")
             print("=================================")
@@ -42,16 +43,15 @@ class HBNBCommand(cmd.Cmd):
 # quit and EOF to exit the program
 
     def do_EOF(self, line):
-        """
-
-        """
-        return true
+        """ Exit the program."""
+        print("")
+        return True
 
     def do_quit(self, line):
         """
-
         """
         return True
+
     def emptyline(self):
         """
         """
@@ -64,11 +64,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """
-
         """
-# If the class name is missing, print ** class name missing ** (ex: $ create)
-# If the class name doesn’t exist, print ** class doesn't exist **
-# (ex: $ create MyModel)
+
         splitline = split(line)
         if not splitline:
             print("** class name missing **")
@@ -85,62 +82,44 @@ class HBNBCommand(cmd.Cmd):
         """
         splitline = split(line)
 
-# If the class name is missing, print ** class name missing **
-# (ex: $ show)
-
         if not splitline:
             print("** class name missing **")
-# If the class name doesn’t exist, print ** class doesn't exist **
-# (ex: $ show MyModel)
 
         elif splitline[0] not in new_classes:
             print("** class doesn't exist **")
 
-# If the id is missing, print ** instance id missing **
-# (ex: $ show BaseModel)
-
         elif len(splitline) < 2:
             print("** instance id missing **")
 
-# If the instance of the class name doesn’t exist for the id,
-# print ** no instance found ** (ex: $ show BaseModel 121212)
         else:
-            new_instance = splitline[0] + '.' + splitline[1]
-            if new_instance not in models.storage.all():
+            new_instance = "{}.{}".format(line.split()[0], line.split()[1])
+
+            objs = models.torage.all()
+
+            if new_instance not in objs:
                 print("** no instance found **")
             else:
-                print(models.storage.all()[new_instance])
+                print(objs[new_instance])
+
+            '''    print("** no instance found **")
+            else:
+                print(models.storage.all()[new_instance])'''
 
     def do_destroy(self, line):
         """
         """
         splitline = split(line)
 
-#If the class name is missing,
-# print ** class name missing **
-#(ex: $ destroy)
-
         if not splitline:
             print("** class name missing **")
             return False
-# If the class name doesn’t exist,
-# print ** class doesn't exist **
-# (ex:$ destroy MyModel)
 
         elif splitline[0] not in new_classes:
             print("** class doesn't exist **")
 
-# If the id is missing,
-# print ** instance id missing **
-# (ex: $ destroy BaseModel)
-
         elif len(splitline) < 2:
             print("** instance id missing **")
 
-# If the instance of the class name
-# doesn’t exist for the id
-# print ** no instance found **
-# (ex: $ destroy BaseModel 121212)
         else:
             new_instance = splitline[0] + '.' + splitline[1]
             if new_instance not in models.storage.all():
@@ -153,9 +132,7 @@ class HBNBCommand(cmd.Cmd):
         """
         """
         str_list = []
-# If the class name doesn’t exist,
-# print ** class doesn't exist **
-# (ex: $ all MyModel)
+
         if not line:
             for new_instance in models.storage.all().values():
                 str_list.append(str(new_instance))
@@ -169,48 +146,27 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return False
         print(str_list)
-# The printed result must be a list of strings
 
     def do_update(self, line):
         """
         """
         splitline = split(line)
 
-#print ** class name missing ** (ex: $ update)
-#
         if not splitline:
             print("** class name missing **")
-
-# If the class name doesn’t exist,
-# print ** class doesn't exist **
-#(ex: $ update)
 
         elif splitline[0] not in new_classes:
             print("** class doesn't exist **")
 
-# If the id is missing,
-#print ** instance id missing **
-#(ex: $ update BaseModel)
-
         elif len(splitline) < 2:
             print("** instance id missing **")
 
-#print ** attribute name missing **
-#(ex: $ update BaseModel existing-id)
-#
-
         elif len(splitline) < 3:
             print("** attribute name missing **")
-#print ** value missing **
-#(ex: $ update BaseModel existing-id first_name)
-#
 
         elif len(splitline) < 4:
             print("** value missing **")
 
-#If the instance of the class name doesn’t exist for the id,
-#print ** no instance found **
-#(ex: $ update BaseModel 121212)
         else:
             new_instance = splitline[0] + '.' + splitline[1]
             if new_instance not in models.storage.all():
@@ -219,6 +175,7 @@ class HBNBCommand(cmd.Cmd):
                 setattr(models.storage.all()[new_instance],
                         splitline[2], splitline[3])
                 models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
