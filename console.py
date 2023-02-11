@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
     """
     command interpreter
     """
-    prompt = '(hbnb)$ '
+    prompt = '(hbnb) '
 
     def do_help(self, args):
         if args == "quit" or args == "EOF":
