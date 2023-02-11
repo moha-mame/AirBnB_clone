@@ -43,8 +43,7 @@ class HBNBCommand(cmd.Cmd):
 # quit and EOF to exit the program
 
     def do_EOF(self, line):
-        """ Exit the program."""
-        print("")
+        """ """
         return True
 
     def do_quit(self, line):
@@ -80,30 +79,21 @@ class HBNBCommand(cmd.Cmd):
         """
 
         """
-        splitline = split(line)
-
-        if not splitline:
+        if not line:
             print("** class name missing **")
-
-        elif splitline[0] not in new_classes:
+        elif line.split()[0] not in new_classes.keys():
             print("** class doesn't exist **")
-
-        elif len(splitline) < 2:
+        elif len(line.split()) < 2:
             print("** instance id missing **")
-
         else:
             new_instance = "{}.{}".format(line.split()[0], line.split()[1])
-
-            objs = models.torage.all()
+            objs = models.storage.all()
 
             if new_instance not in objs:
                 print("** no instance found **")
             else:
                 print(objs[new_instance])
 
-            '''    print("** no instance found **")
-            else:
-                print(models.storage.all()[new_instance])'''
 
     def do_destroy(self, line):
         """
