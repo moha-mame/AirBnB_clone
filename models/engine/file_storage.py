@@ -3,7 +3,7 @@
     Define class FileStorage
 """
 import json
-
+import models
 
 class FileStorage:
     """
