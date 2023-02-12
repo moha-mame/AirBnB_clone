@@ -21,22 +21,19 @@ class HBNBCommand(cmd.Cmd):
     """
     command interpreter
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_quit(self, line):
-        """ Quit command to exit the program.
+        """Quit command to exit the program.
         """
         return True
 
     def do_EOF(self, line):
         """ Exit the program."""
+        print()
         return True
 
     def emptyline(self):
-        """ Shouldn’t execute anything. """
-        pass
-
-    def ENTER(self):
         """ Shouldn’t execute anything. """
         pass
 
@@ -146,6 +143,13 @@ class HBNBCommand(cmd.Cmd):
             """ Execute <class name>.all()"""
             if line[0] == 'all':
                 self.do_all(splitline[0])
+                """Execute <class name>.count() """
+            elif line[0] == 'count':
+                for key in models.storage.all():
+                    if splitline[0] == key.split(".")[0]:
+                        count += 1
+                print(count)
+                """Execute <class name>.show(<id>) """
 
 
 if __name__ == '__main__':
