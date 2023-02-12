@@ -160,13 +160,13 @@ class HBNBCommand(cmd.Cmd):
                 str_id = str(splitline[0]) + " " + str(id[0])
                 self.do_destroy(str_id)
                 """Execute <class name>.update(<id>"""
-            elif args[0] == 'update':
-                update = args[1].split(')')
+            elif line[0] == 'update':
+                update = line[1].split(')')
                 split = update[0].split('{')
                 if len(split) == 1:
-                    arg = update[0].split(",")
-                    str_id = str(splitline[0]) + " " + str(arg[0]) + \
-                        " " + str(arg[1]) + " " + str(arg[2])
+                    line = update[0].split(",")
+                    str_id = str(splitline[0]) + " " + str(line[0]) + \
+                        " " + str(line[1]) + " " + str(line[2])
                     self.do_update(str_id)
                 else:
                     id = split[0][:-2]
@@ -177,7 +177,6 @@ class HBNBCommand(cmd.Cmd):
                         str_id = str(splitline[0]) + " " + str(id) + \
                             " " + str(key_value[0]) + " " + str(key_value[1])
                         self.do_update(str_id)
-
 
 
 if __name__ == '__main__':
