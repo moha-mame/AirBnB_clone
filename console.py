@@ -154,6 +154,12 @@ class HBNBCommand(cmd.Cmd):
                 id = line[1].split(')')
                 str_id = str(splitline[0]) + " " + str(id[0])
                 self.do_show(str_id)
+                """Execute <class name>.destroy(<id>)"""
+            elif args[0] == 'destroy':
+                id = args[1].split(')')
+                str_id = str(splitline[0]) + " " + str(id[0])
+                self.do_destroy(str_id)
+
 
 
 if __name__ == '__main__':
