@@ -10,7 +10,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
+import sys
 new_classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'Amenity': Amenity, 'Place': Place, 'City': City,
                'Review': Review}
