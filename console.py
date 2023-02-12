@@ -10,7 +10,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-import sys
+
 new_classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'Amenity': Amenity, 'Place': Place, 'City': City,
                'Review': Review}
@@ -150,6 +150,10 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                 print(count)
                 """Execute <class name>.show(<id>) """
+            elif line[0] == 'show':
+                id = line[1].split(')')
+                str_id = str(splitline[0]) + " " + str(id[0])
+                self.do_show(str_id)
 
 
 if __name__ == '__main__':
