@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         print(str_list)
 
     def do_update(self, line):
-        """Update command to update an instance base on class name and id by adding or updating attribute"""
+        """Update command to update an instance base on class name and id"""
         splitline = split(line)
 
         if not splitline:
@@ -137,25 +137,15 @@ class HBNBCommand(cmd.Cmd):
                         splitline[2], splitline[3])
                 models.storage.save()
 
-    def precmd(self, line):
-        """preprocess each command line"""
-        if not sys.stdin.isatty():
-            print()
-        if "." in line:
-            line = line.replace(".", " ").replace("()", "")
-            line = line.split(" ")
-            line = f"{line[1]} {line[0]}"
-            return cmd.Cmd.precmd(self, line)
-
-        else:
-            return cmd.Cmd.precmd(self, line)
-
-    def do_count(self, line):
-        """returns the number of elements with the specified value"""
+    def default(self, line):
+        """Parse and interpretates a line if not found on regular commands"""
         count = 0
-        for obj in models.storage.all().values():
-            count += 1
-        print(count)
+        splitline = line.split('.', 1)
+        if len(splitline) >= 2:
+            line = splitline[1].split('(')
+            """ Execute <class name>.all()"""
+            if line[0] == 'all':
+                self.do_all(splitline[0])
 
 
 if __name__ == '__main__':
