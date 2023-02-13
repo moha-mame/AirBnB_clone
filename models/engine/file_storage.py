@@ -44,11 +44,13 @@ class FileStorage:
         """
 
         try:
-            with open(FileStorage.__file_path, encoding="UTF8") as fd:
-                FileStorage.__objects = json.load(fd)
-            for key, val in FileStorage.__objects.items():
-                class_name = val["__class__"]
-                class_name = models.classes[class_name]
-                FileStorage.__objects[key] = class_name(**val)
+            with open(FileStorage.__file_path, mode='r') as fd:
+                objects_dict = json.load(fd)
+
+            for key, value in objects_dict.items():
+                class_name = value.get('__class__')
+                obj = eval(class_name + '(**value)')
+                FileStorage.__objects[key] = obj
+
         except FileNotFoundError:
             pass
